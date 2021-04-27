@@ -20,7 +20,7 @@
         v-model="list"
 
         v-bind="dragOptions"
-        @start="drag = true"
+        @start="isDrag = true"
         @end="endDrag"
 
         item-key="id"
@@ -28,10 +28,16 @@
 
       <template #item="{ element, index }">
         <li class="list-group-item li-drag">
-
+          <i
+              :class="
+                element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'
+              "
+              @click="element.fixed = !element.fixed"
+              aria-hidden="true"
+          ></i>
           <div class="list-index">{{ index + 1 }}</div>
           <div class="list-elem"><strong>{{ element.name }}</strong></div>
-          <div class="list-elem-del" @click="alertDel"><img src="../public/Delete.svg" alt=""></div>
+          <div class="list-elem-del" @click="alertDel(element.name)"><img src="../public/Delete.svg" alt=""></div>
         </li>
       </template>
 
@@ -67,18 +73,18 @@ export default {
         {name: "Женя", id: 6},
 
       ],
-      drag: false,
+      // drag: false,
       oldIndex: '',
       newIndex: ''
     };
   },
 
   methods: {
-    alertDel() {
-      alert(123)
+    alertDel(elem) {
+      confirm('Вы действительно хотите удалить из списка участников игрока ' + elem )
     },
     endDrag(evt) {
-      this.drag = false;
+      this.isDrag = false;
       this.oldIndex = evt.oldIndex;
       this.newIndex = evt.newIndex;
     },
@@ -92,7 +98,7 @@ export default {
   computed: {
     dragOptions() {
       return {
-        animation: 300,
+        animation: 0,
         group: "description",
         disabled: false,
         ghostClass: "ghost"
@@ -106,8 +112,8 @@ export default {
 <style lang="scss" scoped>
 .player-list {
   display: inline-block;
-  text-align: center !important;
-  width: 100%;
+  text-align: right;
+  width: 65%;
   z-index: 0;
   h3 {
     margin-bottom: 5px;
@@ -115,26 +121,14 @@ export default {
 }
 
 .btn-random {
-  position: absolute;
+
   z-index: 2;
   padding: 8px;
-  background-color: #5c7ca1 !important;
-  box-shadow: 0px 0px 10px 7px #2c3e50;
-  border: 3px solid #41B883;
+  background-color: #425b75/*#5c7ca1*/ !important;
+  box-shadow: 0px 0px 10px 5px #2c3e50;
+  border: 3px solid #41b883;
   display: inline-block;
-  &:after{
-    content: "";
-    background: #2c3e50;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px !important;
-    margin-top: -120%;
-    opacity: 0;
-    color: #2c3e50 !important;
-    transition: all 0.8s
-  }
+
 
   div {
     background: url("../public/Swap.svg");
@@ -170,30 +164,29 @@ strong {
 .list-elem-del {
   display: inline-block;
   float: right;
-  padding-top: 0.35em;
+  padding-top: 0.3em;
   padding-right: 10px;
   padding-left: 10px;
   border-left: 2px solid #425b75;
   background-color: #41B883;
-  cursor: default;
+  cursor: pointer;
 
 }
 
 .flip-list-move {
-  transition: transform 0.5s;
+  transition: transform 2s;
 }
 
-.no-move {
-  transition: transform 0s;
-}
+//.no-move {
+//  transition: transform 0s;
+//}
 
 .list-group {
   padding-inline-start: 0;
 }
 
-.no-move {
-  transition: transform 0s;
-}
+
+
 
 .ghost {
   opacity: 0.5;
@@ -230,12 +223,17 @@ strong {
 }
 
 .sortable-chosen {
-  opacity: 0.4;
+  opacity: 0.7;
+}
+.sortable-drag {
+  opacity: 0 !important;
 }
 
 .sortable-chosen {
-  transition: transform 0.5s;
+  transition: transform 0s ;
+
 }
+
 
 .ghost .list-index {
   //border-right: 6px solid #42b983;
@@ -243,7 +241,7 @@ strong {
   border-top-left-radius: 20px;
   background-color: #41B883;
   box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.14);
-  opacity: 0.8;
+
 
   //&::after{
   //  content: " ";

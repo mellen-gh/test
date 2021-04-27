@@ -11,6 +11,7 @@
           v-model="value"/>
       <button class="button-add" @click="addPlayer"><span>Добавить</span></button>
     </div>
+    <TheSearch></TheSearch>
     <DragList></DragList>
     <footerM></footerM>
   </div>
@@ -21,6 +22,7 @@
 // import axios from 'axios'
 import footerM from "@/footerM";
 import DragList from "@/DragList";
+import TheSearch from "./TheSearch";
 
 export default {
   data() {
@@ -48,7 +50,7 @@ export default {
 
     }
   },
-  components: {footerM, DragList}
+  components: {footerM, DragList,TheSearch}
 }
 </script>
 
