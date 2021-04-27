@@ -11,7 +11,7 @@
     <div class="container">
       <div class="search-box">
       <div v-for="item in searchHandler" :key="item.id" class="search-box-b">
-        <div class="search-box-item"> {{ item.name }}</div>
+        <div class="search-box-item"> <div class="box-item">{{ item.name }}</div> </div>
       </div>
       </div>
     </div>
@@ -57,6 +57,7 @@ export default {
 </script>
 
 <style scoped>
+
  .search {
    display: flex;
    margin: 1em;
@@ -73,9 +74,13 @@ export default {
  }
  .search-box-item {
    border: 1px solid #fff;
-   padding: 6px;
+
    border-radius: 5px;
-   font-size: 11px;
+   font-size: 12.5px;
    color: #fff
+ }
+ .box-item{
+   display: inline-block;
+   padding: 10px;
  }
 </style>
