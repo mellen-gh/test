@@ -41,6 +41,10 @@ export default {
       {name: "Вова10", id: 10},
       {name: "Ира11", id: 11},
       {name: "Женя12dddd", id: 12},
+      {name: "Маша9", id: 9},
+      {name: "Вова10", id: 10},
+      {name: "Ира11", id: 11},
+      {name: "Женя12dddd", id: 12},
 
     ];
     console.log(this.persons)
@@ -57,6 +61,13 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  max-height: 220px;
+  overflow: hidden;
+  overflow-y: scroll;
+  border:2px solid #2c3e50;
+  border-radius: 1em;
+}
 
  .search {
    display: flex;
