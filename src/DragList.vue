@@ -174,7 +174,7 @@ strong {
 }
 
 .flip-list-move {
-  transition: transform 2s;
+  transition: transform 0s;
 }
 
 //.no-move {
