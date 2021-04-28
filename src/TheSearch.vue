@@ -23,11 +23,10 @@
 <script>
 export default {
   emits: ['addList'],
-  props: ['people'],
+  props: ['persons'],
   data() {
     return {
-      search: '',
-      persons: []
+      search: ''
     }
   },
   methods: {
@@ -44,36 +43,15 @@ export default {
       }
     }
   },
-  created() {
-    this.persons = [
-      {name: "Артём", id: 1},
-      {name: "Влад", id: 2},
-      {name: "Маша", id: 3},
-      {name: "Вова", id: 4},
-      {name: "Ира", id: 5},
-      {name: "Женя", id: 6},
-      {name: "Артём7", id: 7},
-      {name: "Влад8", id: 8},
-      {name: "Маша9", id: 9},
-      {name: "Вова10", id: 10},
-      {name: "Ира11", id: 11},
-      {name: "Женя12dddd", id: 12},
-      {name: "Маша9", id: 13},
-      {name: "Вова10", id: 14},
-      {name: "Ира11", id: 15},
-      {name: "Женя12dddd", id: 16},
 
-    ];
-    console.log(this.persons)
-  },
-  computed: {
-    searchHandler() {
-      return this.persons.filter(element => {
-        return element.name.toLowerCase().includes(this.search.toLowerCase())
+   computed: {
+     searchHandler() {
+       return this.persons.filter(element => {
+         return element.name.toLowerCase().includes(this.search.toLowerCase())
       });
 
-    }
-  }
+     }
+   }
 }
 </script>
 
