@@ -20,7 +20,7 @@
         v-model="list"
 
         v-bind="dragOptions"
-        @start="isDrag = true"
+        @start="startDrag"
         @end="endDrag"
 
         item-key="id"
@@ -87,11 +87,17 @@ export default {
       this.isDrag = false;
       this.oldIndex = evt.oldIndex;
       this.newIndex = evt.newIndex;
-    },
 
+    },
+    startDrag() {
+      this.isDrag = true;
+
+    },
     randomSort() {
+
       this.list.sort(function () {
         return Math.random() - 0.5;
+
       });
     }
   },
@@ -145,7 +151,7 @@ li {
   div.list-index {
     display: inline-block;
     border-right: 2px solid #425b75;
-    padding: 0.3em;
+    padding: 0.25em;
     padding-left: 16px;
     width: 40px
 
@@ -164,7 +170,7 @@ strong {
 .list-elem-del {
   display: inline-block;
   float: right;
-  padding-top: 0.3em;
+  padding-top: 0.14em;
   padding-right: 10px;
   padding-left: 10px;
   border-left: 2px solid #425b75;
@@ -174,7 +180,7 @@ strong {
 }
 
 .flip-list-move {
-  transition: transform 0s;
+  transition: transform 0.8s;
 }
 
 //.no-move {

@@ -1,12 +1,13 @@
 <template>
   <div class="div-search ">
-    <div class="form-control center">
+    <div class="form-control center inputBox">
     <input
         v-model="search"
         type="search"
         class="search"
         placeholder="Имя игрока"
         />
+
     </div>
     <div class="container">
       <div class="search-box">
@@ -75,6 +76,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .container{
   max-height: 20vh;
   min-height: 20vh;
@@ -88,7 +91,9 @@ export default {
  .search {
    display: flex;
    margin: 1em;
-   width:18%
+   margin-bottom: 2px !important;
+   width:50%;
+   border-radius: 15px;
  }
  .search-box {
    display: flex;
@@ -119,7 +124,8 @@ export default {
    padding-bottom:4px;
    border-radius: 8px;
    font-size: 12.5px;
-   color: #fff
+   color: #fff;
+   cursor:pointer;
  }
  .box-item{
    display: inline-block;
