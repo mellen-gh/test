@@ -1,21 +1,24 @@
 <template>
 
-  <div class="container card">
-    <div class="form-control center" :class="inputWarning ? '' : 'invalid'" @submit.prevent="">
+  <div class="container card2">
+    <div class="form-control center" :class="inputWarning ? '' : 'invalid'" @submit.prevent="" >
       <input
           type="text"
           class="inputAdd"
           ref="addInput"
           id="addPlayer"
-          @input="assertMaxChars()"
+          @input="assertMaxChars"
           v-model="value"/>
       <button class="button-add" @click="addPlayer"><span>Добавить</span></button>
     </div>
-    <TheSearch @addList="colorChange" :persons="persons" ></TheSearch>
-    <DragList  v-if="list.length > 0" :list="list" @remove="removeFromList" @randomSort="randomSort"></DragList>
+    <TheSearch @addList="colorChange" :persons="persons"></TheSearch>
+    <DragList v-if="list.length > 0" :list="list" @remove="removeFromList" @randomSort="randomSort"></DragList>
+
     <footerM></footerM>
   </div>
-
+  <div class="bottom">
+    <button class="button-start-game"><span>Начать игру</span></button>
+  </div>
 </template>
 
 <script>
@@ -30,19 +33,19 @@ export default {
       inputWarning: true,
       search: '',
       persons: [
-        {name:'Влад', id: 1},
-        {name:'Артём', id: 2},
-        {name:'Вова', id: 3},
-        {name:'Ира', id: 4},
-        {name:'Женя', id: 5},
-        {name:'Рома', id: 6},
-        {name:'Арсений', id: 7},
-        {name:'Милена', id: 8},
-        {name:'Оля', id: 9},
-        {name:'Тимур', id: 10},
-        {name:'Олег', id: 11},
-        {name:'Павел', id: 12},
-        {name:'Игнат', id: 13},
+        {name: 'Влад', id: 1},
+        {name: 'Артём', id: 2},
+        {name: 'Вова', id: 3},
+        {name: 'Ира', id: 4},
+        {name: 'Женя', id: 5},
+        {name: 'Рома', id: 6},
+        {name: 'Арсений', id: 7},
+        {name: 'Милена', id: 8},
+        {name: 'Оля', id: 9},
+        {name: 'Тимур', id: 10},
+        {name: 'Олег', id: 11},
+        {name: 'Павел', id: 12},
+        {name: 'Игнат', id: 13},
       ],
       list: [],
       value: '',
@@ -57,8 +60,7 @@ export default {
       let SearchIdElement = document.getElementById($event.id)
       SearchIdElement.classList.add("nochose");
       SearchIdElement.classList.remove("chose");
-      console.log($event)
-      console.log(this.list)
+
 
     },
     randomSort() {
@@ -76,9 +78,8 @@ export default {
         SearchIdElement.classList.remove("nochose");
         this.list.push(element)
 
-        console.log(this.list)
 
-      }else{
+      } else {
         SearchIdElement.classList.add("nochose");
         SearchIdElement.classList.remove("chose");
         console.log(element)
@@ -86,19 +87,23 @@ export default {
       }
     },
     addPlayer() {
-        this.$refs.addInput.value = ''
-     if (this.value.length <= this.minLengthInCars) {
+
+      if (this.value.length <= this.minLengthInCars) {
         this.inputWarning = false
         console.log(1)
-       this.$refs.addInput.blur()
+        this.$refs.addInput.blur()
 
+      }else {
+        this.value = ''
+
+        this.inputWarning = true
       }
 
     },
 
     assertMaxChars: function () {
       if (this.value.length >= this.maxLengthInCars) {
-        this.value = this.value.substring(0,this.maxLengthInCars);
+        this.value = this.value.substring(0, this.maxLengthInCars);
       }
 
     }
@@ -111,7 +116,7 @@ export default {
 
     }
   },
-  components: {footerM, DragList,TheSearch}
+  components: {footerM, DragList, TheSearch}
 }
 </script>
 

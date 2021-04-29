@@ -1,7 +1,7 @@
 <template>
   <div class="row hello">
     <div>
-      <button class="btn primary btn-random" @click="$emit('randomSort')">
+      <button class="btn primary btn-random" @click="$emit('randomSort', item)">
         <div></div>
       </button>
 
@@ -93,6 +93,7 @@ export default {
       this.isDrag = true;
 
     },
+
     alertDel(elem) {
       if (confirm('Вы действительно хотите удалить из списка участников игрока ' + elem.name)) {
           // const idToRemove = elem.id
@@ -117,6 +118,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.hello {
+  display: flex !important;
+  flex-direction: column;
+
+
+}
 .player-list {
   display: inline-block;
   text-align: right;
