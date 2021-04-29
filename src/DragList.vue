@@ -36,7 +36,7 @@
               @click="element.fixed = !element.fixed"
               aria-hidden="true"
           ></i>
-          <div class="a list-index">{{ index + 1 }}</div>
+          <div class="list-index">{{ index + 1 }}</div>
           <div class="list-elem"><strong>{{ element.name }}</strong></div>
           <div class="list-elem-del" @click="alertDel(element)"><img src="../public/Delete.svg" alt=""></div>
         </li>

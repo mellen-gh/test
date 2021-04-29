@@ -12,7 +12,7 @@
     <div class="container">
       <div class="search-box">
       <div v-for="item in searchHandler" :key="item.id" class="search-box-b">
-        <div class="a search-box-item nochose" :id="item.id" @click="$emit('addList', item)"> <div class="box-item">{{ item.name }}</div> </div>
+        <div class="search-box-item nochose" :id="item.id" @click="$emit('addList', item)"> <div class="box-item">{{ item.name }}</div> </div>
       </div>
       </div>
     </div>
