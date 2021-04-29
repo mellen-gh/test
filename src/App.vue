@@ -12,7 +12,7 @@
       <button class="button-add" @click="addPlayer"><span>Добавить</span></button>
     </div>
     <TheSearch @addList="colorChange" :persons="persons" ></TheSearch>
-    <DragList  v-if="this.list.length > 0" :list="list" @remove="removeFromList" @randomSort="randomSort"></DragList>
+    <DragList  v-if="list.length > 0" :list="list" @remove="removeFromList" @randomSort="randomSort"></DragList>
     <footerM></footerM>
   </div>
 

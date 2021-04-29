@@ -56,10 +56,6 @@ import draggable from "vuedraggable";
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 export default {
-  model: {
-    prop: 'list',
-    event: 'change'
-  },
   emits: ['remove', 'randomSort'],
   props: ['list'],
   name: "transition-example",
@@ -67,6 +63,14 @@ export default {
   order: 1,
   components: {
     draggable
+  },
+  watch: {
+    list: {
+      immediate: true,
+      handler() {
+        this.lists = this.list
+      }
+    }
   },
   data() {
     return {
@@ -91,8 +95,8 @@ export default {
     },
     alertDel(elem) {
       if (confirm('Вы действительно хотите удалить из списка участников игрока ' + elem.name)) {
-          const idToRemove = elem.id
-          this.lists = this.lists.filter((item) => item.id !== idToRemove);
+          // const idToRemove = elem.id
+          // this.lists = this.lists.filter((item) => item.id !== idToRemove);
          this.$emit('remove', elem);
          // this.$emit('update:list', listsNew)
       }
@@ -169,7 +173,7 @@ strong {
 .list-elem-del {
   display: inline-block;
   float: right;
-  padding-top: 0.14em;
+  padding-top: 0.17em;
   padding-right: 10px;
   padding-left: 10px;
   border-left: 2px solid #425b75;

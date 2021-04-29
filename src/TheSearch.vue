@@ -30,6 +30,14 @@ export default {
       search: ''
     }
   },
+  watch: {
+    list: {
+      immediate: true,
+      handler() {
+        this.lists = this.list
+      }
+    }
+  },
    computed: {
      searchHandler() {
        return this.persons.filter(element => {
