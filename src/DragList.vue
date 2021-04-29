@@ -136,8 +136,14 @@ export default {
   z-index: 0;
 
 
+
   h3 {
     margin-bottom: 5px;
+    //color: #41b883;
+    text-shadow: 1px 0 -1px #fff,
+    0 1px -1px #fff,
+    -1px 0 -1px #fff,
+    0 -1px -1px #fff;
   }
 }
 
