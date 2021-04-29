@@ -1,7 +1,8 @@
 <template>
   <div class="row hello">
     <div class="spisok">
-      <button class="btn primary btn-random" @click="$emit('randomSort', items)">
+      <button class="btn primary btn-random" @click="$emit('randomSort', lists)">
+<!--        $emit('randomSort', lists)-->
         <div></div>
       </button>
 

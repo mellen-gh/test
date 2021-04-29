@@ -12,7 +12,11 @@
       <button class="button-add" @click="addPlayer"><span>Добавить</span></button>
     </div>
     <TheSearch @addList="colorChange" :persons="persons"></TheSearch>
-    <DragList v-if="list.length > 0" :list="list" @remove="removeFromList" @randomSort="randomSort"></DragList>
+    <DragList
+        v-if="list.length > 0"
+        :list="list"
+        @remove="removeFromList"
+        @randomSort="randomSort"></DragList>
 
     <footerM></footerM>
   </div>
@@ -47,6 +51,7 @@ export default {
         {name: 'Павел', id: 12},
         {name: 'Игнат', id: 13},
       ],
+
       list: [],
       value: '',
       maxLengthInCars: 10,
@@ -63,9 +68,9 @@ export default {
 
 
     },
-    randomSort() {
+    randomSort(evt) {
 
-      this.list.sort(function () {
+     this.list = evt.sort(function () {
         return Math.random() - 0.5;
 
       });
