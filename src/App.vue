@@ -11,7 +11,12 @@
           v-model="value"/>
       <button class="button-add" @click="addPlayer"><span>Добавить</span></button>
     </div>
-    <TheSearch @addList="colorChange" :persons="persons"></TheSearch>
+    <TheSearch
+        @addList="colorChange"
+        :persons="persons"
+        :personsChose="provList"
+        @updateColor="colorAddSearch"
+    ></TheSearch>
     <DragList
         v-if="list.length > 0"
         :list="list"
@@ -51,7 +56,7 @@ export default {
         {name: 'Павел', id: 12},
         {name: 'Игнат', id: 13},
       ],
-
+      provList: [],
       list: [],
       value: '',
       maxLengthInCars: 10,
@@ -65,7 +70,7 @@ export default {
       let SearchIdElement = document.getElementById($event.id)
       SearchIdElement.classList.add("nochose");
       SearchIdElement.classList.remove("chose");
-
+      this.provList = this.provList.filter((item) => item.id !== idToRemove);
 
     },
     randomSort(evt) {
@@ -82,45 +87,74 @@ export default {
         SearchIdElement.classList.add("chose");
         SearchIdElement.classList.remove("nochose");
         this.list.push(element)
+        this.provList.push(element)
 
 
       } else {
         SearchIdElement.classList.add("nochose");
         SearchIdElement.classList.remove("chose");
-        console.log(element)
+       // console.log(element)
         this.list = this.list.filter((item) => item.id !== idToRemove);
+        this.provList = this.provList.filter((item) => item.id !== idToRemove);
+        console.log(this.provList)
       }
     },
     addPlayer() {
 
       if (this.value.length <= this.minLengthInCars) {
         this.inputWarning = false
-        console.log(1)
+       // console.log(1)
         this.$refs.addInput.blur()
 
       }else {
-        this.value = ''
 
+        let elementNew = {
+          name: this.value,
+          id:Math.random() * 11
+        }
+        this.persons.push(elementNew )
         this.inputWarning = true
+        this.value = ''
       }
 
     },
+    colorAddSearch(elems) {
+      console.log(1);
+      console.log(elems);
+      if (elems) {
+        console.log(2);
+        console.log(elems)
+        elems.forEach(function (arrayItem) {
+          setTimeout(function(){
+          let id = arrayItem.id
+
+          let SearchIdElement = document.getElementById(id)
+          if (SearchIdElement) {
+            SearchIdElement.classList.add("chose");
+            SearchIdElement.classList.remove("nochose");
+          }
+          }, 0);
+        })
+      }
+    },
 
     assertMaxChars: function () {
+
       if (this.value.length >= this.maxLengthInCars) {
         this.value = this.value.substring(0, this.maxLengthInCars);
       }
 
     }
   },
-  computed: {
-    searchHandler() {
-      return this.persons.filter(element => {
-        return element.name.toLowerCase().includes(this.search.toLowerCase())
-      });
-
-    }
-  },
+  // computed: {
+  //   searchHandler() {
+  //
+  //     return this.persons.filter(element => {
+  //       return element.name.toLowerCase().includes(this.search.toLowerCase())
+  //     });
+  //
+  //   }
+  // },
   components: {footerM, DragList, TheSearch}
 }
 </script>

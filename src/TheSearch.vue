@@ -22,24 +22,30 @@
 
 <script>
 export default {
-  emits: ['addList'],
-  props: ['persons'],
-
-  data() {
-    return {
-      search: ''
-    }
-  },
+  emits: ['addList', 'updateColor'],
+  props: ['persons', 'personsChose'],
   watch: {
-    list: {
+    personsChose: {
       immediate: true,
       handler() {
-        this.lists = this.list
+        this.personLocal = this.personsChose
+
       }
     }
   },
+  data() {
+    return {
+      search: '',
+      personLocal: this.personsChose
+    }
+  },
+
+
    computed: {
+
      searchHandler() {
+
+       this.$emit('updateColor', this.personLocal)
        return this.persons.filter(element => {
          return element.name.toLowerCase().includes(this.search.toLowerCase())
       });

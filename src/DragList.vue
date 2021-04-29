@@ -186,7 +186,7 @@ strong {
 .list-elem-del {
   display: inline-block;
   float: right;
-  padding-top: 0.17em;
+  padding-top: 0.23rem;
   padding-right: 10px;
   padding-left: 10px;
   border-left: 2px solid #425b75;
