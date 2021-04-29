@@ -1,7 +1,7 @@
 <template>
   <div class="row hello">
-    <div>
-      <button class="btn primary btn-random" @click="$emit('randomSort', item)">
+    <div class="spisok">
+      <button class="btn primary btn-random" @click="$emit('randomSort', items)">
         <div></div>
       </button>
 
@@ -124,11 +124,16 @@ export default {
 
 
 }
+.list-group {
+
+}
+
 .player-list {
   display: inline-block;
   text-align: right;
-  width: 65%;
+  margin-left: 1.6em;
   z-index: 0;
+
 
   h3 {
     margin-bottom: 5px;
@@ -212,8 +217,12 @@ strong {
 }
 
 .list-group-item {
-
+  box-shadow: -1px 7px 7px #2c3e50,
+  1px 7px 7px #2c3e50;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   cursor: move;
+
 }
 
 .list-group-item i {

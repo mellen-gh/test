@@ -17,7 +17,7 @@
     <footerM></footerM>
   </div>
   <div class="bottom">
-    <button class="button-start-game"><span>Начать игру</span></button>
+    <button class="button-start-game" :disabled="list.length < 8"><span>Начать игру</span></button>
   </div>
 </template>
 
