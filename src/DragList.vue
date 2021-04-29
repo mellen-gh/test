@@ -1,7 +1,7 @@
 <template>
   <div class="row hello">
     <div>
-      <button class="btn primary btn-random" @click="randomSort">
+      <button class="btn primary btn-random" @click="$emit('randomSort')">
         <div></div>
       </button>
 
@@ -17,8 +17,8 @@
           type: 'transition',
           name: 'flip-list'
         }"
-        v-model="list"
 
+        v-model="lists"
         v-bind="dragOptions"
         @start="startDrag"
         @end="endDrag"
@@ -37,7 +37,7 @@
           ></i>
           <div class="list-index">{{ index + 1 }}</div>
           <div class="list-elem"><strong>{{ element.name }}</strong></div>
-          <div class="list-elem-del" @click="alertDel(element.name)"><img src="../public/Delete.svg" alt=""></div>
+          <div class="list-elem-del" @click="alertDel(element)"><img src="../public/Delete.svg" alt=""></div>
         </li>
       </template>
 
@@ -56,6 +56,12 @@ import draggable from "vuedraggable";
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 export default {
+  model: {
+    prop: 'list',
+    event: 'change'
+  },
+  emits: ['remove', 'randomSort'],
+  props: ['list'],
   name: "transition-example",
   display: "Transition",
   order: 1,
@@ -64,25 +70,15 @@ export default {
   },
   data() {
     return {
-      list: [
-        {name: "Артём", id: 1},
-        {name: "Влад", id: 2},
-        {name: "Маша", id: 3},
-        {name: "Вова", id: 4},
-        {name: "Ира", id: 5},
-        {name: "Женя", id: 6},
-
-      ],
       // drag: false,
       oldIndex: '',
-      newIndex: ''
+      newIndex: '',
+      lists: this.list,
     };
   },
 
   methods: {
-    alertDel(elem) {
-      confirm('Вы действительно хотите удалить из списка участников игрока ' + elem )
-    },
+
     endDrag(evt) {
       this.isDrag = false;
       this.oldIndex = evt.oldIndex;
@@ -93,12 +89,13 @@ export default {
       this.isDrag = true;
 
     },
-    randomSort() {
-
-      this.list.sort(function () {
-        return Math.random() - 0.5;
-
-      });
+    alertDel(elem) {
+      if (confirm('Вы действительно хотите удалить из списка участников игрока ' + elem.name)) {
+          const idToRemove = elem.id
+          this.lists = this.lists.filter((item) => item.id !== idToRemove);
+         this.$emit('remove', elem);
+         // this.$emit('update:list', listsNew)
+      }
     }
   },
   computed: {
@@ -121,6 +118,7 @@ export default {
   text-align: right;
   width: 65%;
   z-index: 0;
+
   h3 {
     margin-bottom: 5px;
   }
@@ -130,7 +128,8 @@ export default {
 
   z-index: 2;
   padding: 8px;
-  background-color: #425b75/*#5c7ca1*/ !important;
+  background-color: #425b75 /*#5c7ca1*/
+  !important;
   box-shadow: 0px 0px 10px 5px #2c3e50;
   border: 3px solid #41b883;
   display: inline-block;
@@ -192,8 +191,6 @@ strong {
 }
 
 
-
-
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
@@ -231,12 +228,13 @@ strong {
 .sortable-chosen {
   opacity: 0.7;
 }
+
 .sortable-drag {
   opacity: 0 !important;
 }
 
 .sortable-chosen {
-  transition: transform 0s ;
+  transition: transform 0s;
 
 }
 

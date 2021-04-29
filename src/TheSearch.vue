@@ -24,26 +24,12 @@
 export default {
   emits: ['addList'],
   props: ['persons'],
+
   data() {
     return {
       search: ''
     }
   },
-  methods: {
-    colorChange(element) {
-      let SearchIdElement = document.getElementById(element.id)
-      if (SearchIdElement.classList.contains('nochose')) {
-        SearchIdElement.classList.add("chose");
-        SearchIdElement.classList.remove("nochose");
-
-      }else{
-        SearchIdElement.classList.add("nochose");
-        SearchIdElement.classList.remove("chose");
-
-      }
-    }
-  },
-
    computed: {
      searchHandler() {
        return this.persons.filter(element => {
