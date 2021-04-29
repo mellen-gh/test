@@ -9,7 +9,7 @@
           id="addPlayer"
           @input="assertMaxChars"
           v-model="value"/>
-      <button class="button-add" @click="addPlayer"><span>Добавить</span></button>
+      <button class="a button-add" @click="addPlayer"><span>Добавить</span></button>
     </div>
     <TheSearch
         @addList="colorChange"
